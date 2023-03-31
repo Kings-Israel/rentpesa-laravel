@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\laravel_example\UserManagement;
-
+use \App\Http\Controllers\Auth\LoginController;
+use \App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,37 @@ use App\Http\Controllers\laravel_example\UserManagement;
 |
 */
 
+Route::middleware('guest')->group(function() {
+  Route::get('/login', [LoginController::class, 'index'])->name('login');
+  Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+  Route::get('/register', [RegisterController::class, 'index'])->name('register');
+  Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+});
+
+Route::middleware('auth')->group(function() {
+  Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+  })->name('verification.notice');
+  Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('dashboard');
+  })->middleware(['signed'])->name('verification.verify');
+
+  Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+  })->middleware(['throttle:6,1'])->name('verification.send');
+
+  Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
+
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
-Route::get('/dashboard/analytics', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+//Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+//Route::get('/dashboard/analytics', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
 Route::get('/dashboard/crm', $controller_path . '\dashboard\Crm@index')->name('dashboard-crm');
 Route::get('/dashboard/ecommerce', $controller_path . '\dashboard\Ecommerce@index')->name('dashboard-ecommerce');
 

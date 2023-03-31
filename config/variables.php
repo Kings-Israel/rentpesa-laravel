@@ -1,12 +1,12 @@
 <?php
   // Variables
   return [
-    "creatorName" => "Pixinvent",
-    "creatorUrl" => "https://pixinvent.com",
-    "templateName" => "Vuexy",
-    "templateSuffix" => "Bootstrap Admin Template",
+    "creatorName" => "Kings",
+    "creatorUrl" => "https://github.com/Kings-Israel",
+    "templateName" => "Rentpesa",
+    "templateSuffix" => "Property Management",
     "templateVersion" => "1.0.0",
-    "templateFree" => false,
+    "templateFree" => true,
     "templateDescription" => "Start your development with a Dashboard for Bootstrap 5",
     "templateKeyword" => "dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5",
     "licenseUrl" => "https://themeforest.net/licenses/standard",

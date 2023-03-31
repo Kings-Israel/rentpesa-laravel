@@ -48,7 +48,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
           <!-- Language -->
-          <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+          <li class="d-none nav-item dropdown-language dropdown me-2 me-xl-0">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <i class='fi fi-us fis rounded-circle me-1 fs-3'></i>
             </a>
@@ -457,7 +457,6 @@ $navbarDetached = ($navbarDetached ?? '');
               <li>
                 <div class="dropdown-divider"></div>
               </li>
-              @if (Auth::check())
               <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class='ti ti-logout me-2'></i>
@@ -467,14 +466,6 @@ $navbarDetached = ($navbarDetached ?? '');
               <form method="POST" id="logout-form" action="{{ route('logout') }}">
                 @csrf
               </form>
-              @else
-              <li>
-                <a class="dropdown-item" href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
-                  <i class='ti ti-login me-2'></i>
-                  <span class="align-middle">Login</span>
-                </a>
-              </li>
-              @endif
             </ul>
           </li>
           <!--/ User -->
