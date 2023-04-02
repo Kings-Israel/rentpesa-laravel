@@ -369,7 +369,7 @@ $navbarDetached = ($navbarDetached ?? '');
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show') : url('pages/profile-user') }}">
+                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show', auth()->user()) : url('pages/profile-user') }}">
                   <div class="d-flex">
 {{--                    <div class="flex-shrink-0 me-3">--}}
 {{--                      <div class="avatar avatar-online">--}}
@@ -389,7 +389,7 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show') : url('pages/profile-user') }}">
+                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show', auth()->user()) : url('pages/profile-user') }}">
                   <i class="ti ti-user-check me-2 ti-sm"></i>
                   <span class="align-middle">My Profile</span>
                 </a>

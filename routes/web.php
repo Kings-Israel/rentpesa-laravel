@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\laravel_example\UserManagement;
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function() {
   })->middleware(['throttle:6,1'])->name('verification.send');
 
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+  Route::prefix('user')->group(function() {
+    Route::get('/profile/{user}', [UserController::class, 'show'])->name('profile.show');
+  });
 });
 
 $controller_path = 'App\Http\Controllers';
