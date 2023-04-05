@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function() {
   Route::prefix('user')->group(function() {
     Route::get('/profile/{user}', [UserController::class, 'show'])->name('profile.show');
   });
+
+  // Properties
+  Route::resource('/properties', PropertyController::class);
 });
 
 $controller_path = 'App\Http\Controllers';
