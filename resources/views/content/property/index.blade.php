@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'DataTables - Advanced Tables')
+@section('title', 'Properties')
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -19,11 +19,12 @@
 @section('page-script')
   {{--  <script src="{{asset('assets/js/tables-datatables-advanced.js')}}"></script>--}}
   <script>
+    console.log({{ route('properties.resource') }})
     var dt_ajax_table = $('.datatables-ajax')
     if (dt_ajax_table.length) {
       var dt_ajax = dt_ajax_table.dataTable({
         processing: true,
-        ajax: assetsPath + 'json/ajax.php',
+        ajax: {{ route('properties.resource') }},
         dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>'
       });
     }
@@ -47,12 +48,10 @@
       <table class="datatables-ajax table">
         <thead>
         <tr>
-          <th>Full name</th>
-          <th>Email</th>
-          <th>Position</th>
-          <th>Office</th>
-          <th>Start date</th>
-          <th>Salary</th>
+          <th>Name</th>
+          <th>Date Added</th>
+          <th>Agreement Start Date</th>
+          <th>Agreement End Date</th>
         </tr>
         </thead>
       </table>

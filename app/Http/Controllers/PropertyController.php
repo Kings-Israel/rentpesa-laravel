@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePropertyRequest;
+use App\Http\Resources\PropertiesResource;
+use App\Jobs\StoreImage;
 use App\Models\County;
 use App\Models\Property;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class PropertyController extends Controller
@@ -23,6 +27,11 @@ class PropertyController extends Controller
         return view('content.property.index');
     }
 
+    public function propertiesResource()
+    {
+        return new PropertiesResource();
+    }
+
     public function create(): View
     {
         $property_types = PropertyType::all();
@@ -31,9 +40,26 @@ class PropertyController extends Controller
         return view('content.property.create', compact('property_types', 'counties'));
     }
 
-    public function store(Request $request)
+    public function store(StorePropertyRequest $request)
     {
-        // TODO: Add functionality to store a new property
+        $property = auth()->user()->properties()->create([
+          'property_type_id' => $request->plPropertyType,
+          'name' => $request->plName,
+          'cover_image' => pathinfo($request->plCoverImage->store('cover', 'property'), PATHINFO_BASENAME),
+          'rent_payment_day' => $request->plRentPaymentDay,
+          'late_payment_charge' => $request->plLatePaymentCharge,
+          'county_id' => $request->plPropertyCounty,
+          'subcounty_id' => $request->plPropertySubcounty,
+          'nearest_landmark' => $request->has('plNearestLandmark') && $request->plNearestLandmark != null ? $request->plNearestLandmark : NULL,
+          'street' => $request->has('plPropertyStreet') && $request->plPropertyStreet != null ? $request->plPropertyStreet : NULL,
+          'address' => $request->has('plPropertyAddress') && $request->plPropertyAddress != null ? $request->plPropertyAddress : NULL,
+          'agreement_start_date' => $request->plAgreementStartDate,
+          'agreement_end_date' => $request->plAgreementEndDate,
+          'other_details' => $request->has('plOtherDetails') && $request->plOtherDetails != null ? $request->plOtherDetails : NULL,
+        ]);
+
+//        return view('content.property.show', compact('property'));
+      return redirect()->route('properties.index')->with('success', 'Property added successfully');
     }
 
     public function view(Property $property)

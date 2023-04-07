@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function() {
 
   // Properties
   Route::resource('/properties', PropertyController::class);
+  Route::get('properties/resource', [PropertyController::class, 'propertiesResource'])->name('properties.resource');
 });
 
 $controller_path = 'App\Http\Controllers';

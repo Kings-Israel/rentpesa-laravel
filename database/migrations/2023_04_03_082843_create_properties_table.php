@@ -26,8 +26,10 @@ return new class extends Migration
             $table->foreignId('subcounty_id')->nullable()->references('id')->on('subcounties')->onDelete(null)->cascadeOnUpdate();
             $table->string('nearest_landmark')->nullable();
             $table->string('street')->nullable();
+            $table->string('address')->nullable();
             $table->date('agreement_start_date');
             $table->date('agreement_end_date');
+            $table->longText('other_details')->nullable();
             $table->timestamps();
         });
     }

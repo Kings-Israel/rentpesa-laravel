@@ -23,15 +23,16 @@
 @endsection
 
 @section('page-script')
-  <script src="{{asset('assets/js/property-add-wizard.js')}}"></script>
+  <script src="{{asset('assets/js/property-create-wizard.js')}}"></script>
   <script>
     function getSubcounties() {
-      let subcounties = $('#plPropertyCounty').find(':selected').data('subcounties')
-      let subcountyOptions = document.getElementById('plPropertySubcounty')
+      let subcounties = $('#plCounty').find(':selected').data('subcounties')
+      let subcountyOptions = document.getElementById('plSubcounty')
       while (subcountyOptions.options.length) {
         subcountyOptions.remove(0);
       }
       if (subcounties) {
+
         var i;
         for (i = 0; i < subcounties.length; i++) {
           var subcounty = new Option(subcounties[i].name, subcounties[i].id);
@@ -49,10 +50,10 @@
   </h4>
 
   <!-- Property Listing Wizard -->
-  <div id="wizard-property-listing" class="bs-stepper wizard-modern mt-2">
+  <div id="property-add-wizard" class="bs-stepper vertical mt-2">
     <div class="bs-stepper-header">
       @role('admin')
-      <div class="step" data-target="#landlord-details">
+      <div class="step" data-target="#personal-details">
         <button type="button" class="step-trigger">
           <span class="bs-stepper-circle"><i class="ti ti-users ti-sm"></i></span>
           <span class="bs-stepper-label">
@@ -71,7 +72,7 @@
         </button>
       </div>
       <div class="line"></div>
-      <div class="step" data-target="#agreement-details">
+      <div class="step" data-target="#property-features">
         <button type="button" class="step-trigger">
           <span class="bs-stepper-circle"><i class="ti ti-bookmarks ti-sm"></i></span>
           <span class="bs-stepper-label">
@@ -81,8 +82,7 @@
       </div>
     </div>
     <div class="bs-stepper-content">
-      <form id="wizard-property-listing-form" method="POST" action="{{ route('properties.store') }}" enctype="multipart/form-data">
-        @csrf
+      <form id="property-add-wizard-form" onSubmit="return false">
         @role('admin')
         <!-- Landlord Details -->
         <div id="landlord-details" class="content">
@@ -183,64 +183,43 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label class="form-label" for="plZipCode">Property Name</label>
-              <input type="text" id="plName" name="plName" class="form-control" placeholder="Enter Property Name" value="{{ old('plName') }}" />
-              @error('plName')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="text" id="plName" name="plName" class="form-control" placeholder="Enter Property Name" />
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plPropertyType">Property Type</label>
               <select id="plPropertyType" name="plPropertyType" class="select2 form-select" data-allow-clear="true">
                 <option value="">Select Property Type</option>
                 @foreach($property_types as $property_type)
-                  <option value="{{ $property_type->id }}" @if(old('plPropertyType') == $property_type->id) selected @endif>{{ $property_type->name }}</option>
+                  <option value="{{ $property_type->id }}">{{ $property_type->name }}</option>
                 @endforeach
               </select>
-              @error('plPropertyName')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plPropertyCounty">County</label>
               <select id="plPropertyCounty" name="plPropertyCounty" class="select2 form-select" data-allow-clear="true" onchange="getSubcounties()">
-                <option value="">Select County</option>
+                <option value="">Select</option>
                 @foreach($counties as $county)
-                  <option value="{{ $county->id }}" @if(old('plPropertyCounty') == $county->id) selected @endif data-subcounties="{{ $county->subcounties }}">{{ $county->name }}</option>
+                  <option value="{{ $county->id }}" data-subcounties="{{ $county->subcounties }}">{{ $county->name }}</option>
                 @endforeach
               </select>
-              @error('plPropertyCounty')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plPropertySubcounty">Sub-county</label>
               <select id="plPropertySubcounty" name="plPropertySubcounty" class="select2 form-select" data-allow-clear="true">
                 <option value="">Select Sub county</option>
               </select>
-              @error('plPropertySubCounty')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plStreet">Road/Street</label>
-              <input type="text" id="plPropertyStreet" name="plPropertyStreet" class="form-control" placeholder="Enter Road/Street" value="{{ old('plPropertyStreet') }}" />
-              @error('plStreet')
-              <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="text" id="plPropertyStreet" name="plPropertyStreet" class="form-control" placeholder="Enter Road/Street" />
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plLandmark">Nearest Landmark</label>
-              <input type="text" id="plNearestLandmark" name="plNearestLandmark" class="form-control" placeholder="Nr. Hard Rock Cafe" value="{{ old('plNearestLandmark') }}" />
-              @error('plNearestLandmark')
-              <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="text" id="plNearestLandmark" name="plNearestLandmark" class="form-control" placeholder="Nr. Hard Rock Cafe" />
             </div>
             <div class="col-lg-12">
               <label class="form-label" for="plAddress">Address</label>
-              <textarea id="plAddress" name="plPropertyAddress" class="form-control" rows="2" placeholder="12, Business Park">{{ old('plPropertyAddress') }}</textarea>
-              @error('plPropertyAddress')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <textarea id="plAddress" name="plPropertyAddress" class="form-control" rows="2" placeholder="12, Business Park"></textarea>
             </div>
             <div class="col-12 d-flex justify-content-between mt-4">
               <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
@@ -249,22 +228,16 @@
           </div>
         </div>
 
-        <!-- Agreement Details -->
-        <div id="agreement-details" class="content">
+        <!-- Property Agreement Details -->
+        <div id="property-agreement-details" class="content">
           <div class="row g-3">
             <div class="col-sm-6">
               <label class="form-label d-block" for="plAgreementStartDate">Agreement Start Date</label>
-              <input type="date" id="plAgreementStartDate" name="plAgreementStartDate" class="form-control" value="{{ old('plAgreementStartDate') }}" />
-              @error('plAgreementStartDate')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="date" id="plAgreementStartDate" name="plAgreementStartDate" class="form-control" />
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plAgreementEndDate">Agreement End Date</label>
-              <input type="date" id="plAgreementEndDate" name="plAgreementEndDate" class="form-control" value="{{ old('plAgreementEndDate') }}" />
-              @error('plAgreementEndDate')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="date" id="plAgreementEndDate" name="plAgreementEndDate" class="form-control" />
             </div>
             <div class="col-sm-6">
               <label class="form-label d-block" for="plRentPaymentDay">Rent Payment Day</label>
@@ -274,34 +247,22 @@
                   $locale = 'en_US';
                   $nf = new NumberFormatter($locale, NumberFormatter::ORDINAL);
                 @endphp
-                @for($i = 1; $i <= 31; $i++)
-                  <option value="{{ $nf->format($i).' Day of the Month' }}" @if(old('plRentPaymentDay') === $nf->format($i).' Day of the Month') selected @endif>{{ $nf->format($i) }} Day of the Month</option>
+                @for($i = 0; $i <= 31; $i++)
+                  <option value="{{ $nf->format($i) }}">{{ $nf->format($i) }}</option>
                 @endfor
               </select>
-              @error('plRentPaymentDay')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="plLatePaymentCharge">Late Payment Charge(%)</label>
-              <input type="number" id="plLatePaymentCharge" name="plLatePaymentCharge" class="form-control" placeholder="10" value="{{ old('plLatePaymentCharge') }}" />
-              @error('plLatePaymentCharge')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="date" id="plLatePaymentCharge" name="plLatePaymentCharge" class="form-control" placeholder="10" />
             </div>
             <div class="col-sm-12">
               <label class="form-label" for="plCoverImage">Property Image</label>
-              <input type="file" id="basic-default-upload-file" name="plCoverImage" accept=".jpg,.jpeg,.png" class="form-control" required />
-              @error('plCoverImage')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <input type="file" id="plCoverImage" name="plCoverImage" accept=".jpg,.jpeg,.png" class="form-control" />
             </div>
             <div class="col-lg-12">
               <label class="form-label" for="plOtherDetails">Other Property Details</label>
-              <textarea id="plOtherDetails" name="plOtherDetails" class="form-control" rows="2">{{ old('plOtherDetails') }}</textarea>
-              @error('plOtherDetails')
-                <span class="text-danger">{{ $message }}</span>
-              @enderror
+              <textarea id="plOtherDetails" name="plOtherDetails" class="form-control" rows="2"></textarea>
             </div>
             <div class="col-12 d-flex justify-content-between mt-4">
               <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left ti-xs me-sm-1 me-0"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
