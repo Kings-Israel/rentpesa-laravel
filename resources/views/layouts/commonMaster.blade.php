@@ -18,24 +18,25 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
 
-  
+
 
   <!-- Include Styles -->
   @include('layouts/sections/styles')
 
   <!-- Include Scripts for customizer, helper, analytics, config -->
   @include('layouts/sections/scriptsIncludes')
+  <livewire:styles />
 </head>
 
 <body>
-  
+
 
   <!-- Layout Content -->
   @yield('layoutContent')
   <!--/ Layout Content -->
 
-  
 
+  <livewire:scripts />
   <!-- Include Scripts -->
   @include('layouts/sections/scripts')
 

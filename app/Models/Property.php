@@ -12,6 +12,12 @@ class Property extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+      'agreement_start_date' => 'date',
+      'agreement_end_date' => 'date',
+      'is_active' => 'boolean'
+    ];
+
     public function user(): BelongsTo
     {
       return $this->belongsTo(User::class);

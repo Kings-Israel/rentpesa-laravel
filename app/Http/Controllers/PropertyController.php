@@ -62,9 +62,9 @@ class PropertyController extends Controller
       return redirect()->route('properties.index')->with('success', 'Property added successfully');
     }
 
-    public function view(Property $property)
+    public function show(Property $property)
     {
-        //TODO: Add view for viewing a property
+        //TODO: Add view for showing a property
     }
 
     public function edit(Property $property)
