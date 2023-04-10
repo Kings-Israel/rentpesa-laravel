@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\laravel_example\UserManagement;
 use \App\Http\Controllers\Auth\LoginController;
@@ -27,6 +28,8 @@ Route::middleware('guest')->group(function() {
   Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 });
 
+Auth::routes();
+
 Route::middleware('auth')->group(function() {
   Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -49,9 +52,7 @@ Route::middleware('auth')->group(function() {
   });
 
   // Properties
-  Route::post('/properties/{property}/update', [PropertyController::class, 'update'])->name('properties.update');
   Route::resource('/properties', PropertyController::class);
-  Route::get('properties/resource', [PropertyController::class, 'propertiesResource'])->name('properties.resource');
 });
 
 $controller_path = 'App\Http\Controllers';

@@ -35,14 +35,24 @@ class PropertyList extends Component
 
     public function render()
     {
-        $properties = Property::where('user_id', auth()->id())
-                              ->when($this->search && $this->search != '', function($query) {
-                                $query->where('name', 'LIKE', '%'.$this->search.'%');
-                              })
-                              ->when($this->status && $this->status != '', function($query) {
-                                $query->where('is_active', $this->status);
-                              })
-                              ->paginate();
+        if (auth()->user()->userRole() != 'admin') {
+            $properties = Property::where('user_id', auth()->id())
+                                  ->when($this->search && $this->search != '', function($query) {
+                                    $query->where('name', 'LIKE', '%'.$this->search.'%');
+                                  })
+                                  ->when($this->status && $this->status != '', function($query) {
+                                    $query->where('is_active', $this->status);
+                                  })
+                                  ->paginate();
+        } else {
+            $properties = Property::when($this->search && $this->search != '', function($query) {
+                                    $query->where('name', 'LIKE', '%'.$this->search.'%');
+                                  })
+                                  ->when($this->status && $this->status != '', function($query) {
+                                    $query->where('is_active', $this->status);
+                                  })
+                                  ->paginate();
+        }
 
         return view('livewire.content.property.property-list', compact('properties'));
     }

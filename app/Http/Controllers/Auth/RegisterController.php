@@ -34,4 +34,10 @@ class RegisterController extends Controller
   {
     return view('auth.verify-email', ['email' => $user->email]);
   }
+
+  public function showRegistrationForm()
+  {
+    $pageConfigs = ['myLayout' => 'blank'];
+    return view('content.auth.register', ['pageConfigs' => $pageConfigs]);
+  }
 }

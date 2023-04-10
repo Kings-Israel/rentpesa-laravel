@@ -43,6 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function userRole()
+    {
+        if (auth()->check()) {
+          return auth()->user()->getRoleNames()[0];
+        }
+
+        return '';
+    }
+
     public function properties()
     {
         return $this->hasMany(Property::class);

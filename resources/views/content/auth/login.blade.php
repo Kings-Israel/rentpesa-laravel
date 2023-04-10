@@ -53,7 +53,7 @@ $configData = Helper::appClasses();
         <h3 class=" mb-1 fw-bold">Welcome to {{config('variables.templateName')}}! 👋</h3>
         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-        <form id="formAuthentication" class="mb-3" action="{{ route('login.submit') }}" method="POST">
+        <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
           @csrf
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>

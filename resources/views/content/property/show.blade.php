@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-md-6 col-lg-4 mb-3">
       <div class="card h-100">
-        <img class="card-img-top" src="{{ url('/storage/cover/'.$property->cover_image) }}" alt="Card image cap" />
+        <img class="card-img-top" src="{{ url('/storage/property/cover/'.$property->cover_image) }}" alt="Card image cap" />
         <div class="card-body">
           <h5 class="card-title">{{ $property->name }}</h5>
           <p class="card-text">
