@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function() {
   });
 
   // Properties
+  Route::post('/properties/{property}/update', [PropertyController::class, 'update'])->name('properties.update');
   Route::resource('/properties', PropertyController::class);
   Route::get('properties/resource', [PropertyController::class, 'propertiesResource'])->name('properties.resource');
 });

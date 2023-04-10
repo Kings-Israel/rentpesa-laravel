@@ -18,8 +18,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
 
-
-
   <!-- Include Styles -->
   @include('layouts/sections/styles')
 

@@ -60,7 +60,9 @@
                   </div>
                   <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
                     {{-- TODO: Add url to view property on image --}}
-                    <img src="{{ url('/storage/cover/'.$property->cover_image) }}" alt="Website Analytics" width="170" class="card-website-analytics-img">
+                    <a href="{{ route('properties.show', $property) }}">
+                      <img src="{{ url('/storage/cover/'.$property->cover_image) }}" alt="Website Analytics" width="170" class="card-website-analytics-img">
+                    </a>
                   </div>
                 </div>
               </div>

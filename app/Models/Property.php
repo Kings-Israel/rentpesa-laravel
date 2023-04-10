@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,13 +14,21 @@ class Property extends Model
     protected $guarded = [];
 
     protected $casts = [
-      'agreement_start_date' => 'date',
-      'agreement_end_date' => 'date',
       'is_active' => 'boolean'
     ];
 
     public function user(): BelongsTo
     {
       return $this->belongsTo(User::class);
+    }
+
+    public function county(): BelongsTo
+    {
+      return $this->belongsTo(County::class);
+    }
+
+    public function subcounty(): BelongsTo
+    {
+      return $this->belongsTo(Subcounty::class);
     }
 }

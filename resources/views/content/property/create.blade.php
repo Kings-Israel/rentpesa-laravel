@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Property Listing - Wizard Examples')
+@section('title', 'Add Property')
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.css')}}" />
@@ -43,13 +43,12 @@
 @endsection
 
 @section('content')
+  <h4 class="fw-bold">
+    <span class="text-muted fw-light"><a href="{{ route('properties.index') }}">Properties</a> /</span> Add Property
 
-  <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">Properties /</span> Add Property
   </h4>
-
   <!-- Property Listing Wizard -->
-  <div id="wizard-property-listing" class="bs-stepper wizard-modern mt-2">
+  <div id="wizard-property-listing" class="bs-stepper wizard">
     <div class="bs-stepper-header">
       @role('admin')
       <div class="step" data-target="#landlord-details">

@@ -1,22 +1,21 @@
 <div>
-  <div class="d-flex justify-content-between">
+  <h4 class="fw-bold py-1 mb-2">
+    <span class="text-muted fw-light">My Properties</span>
+  </h4>
+  <div class="d-flex justify-content-between py-1 mb-2">
     <div class="d-flex">
-      <h4 class="fw-bold py-1 mb-2">
-        <span class="text-muted fw-light">My Properties</span>
-      </h4>
-      <div class="d-flex">
-        <div class="mx-1">
-          <input class="form-control" name="search" wire:model="search" placeholder="Search Properties" />
-        </div>
-        <div class="mx-1">
-          <select class="form-select select2" wire:model="status">
-            <option value="">Select Status</option>
-            <option value="1">Active</option>
-            <option value="false">Inactive</option>
-          </select>
-        </div>
+      <div class="mx-1">
+        <input class="form-control" name="search" wire:model="search" placeholder="Search Properties" />
+      </div>
+      <div class="mx-1">
+        <select class="form-select select2" wire:model="status">
+          <option value="">Select Status</option>
+          <option value="1">Active</option>
+          <option value="false">Inactive</option>
+        </select>
       </div>
     </div>
+
     <div class="d-flex">
       <div class="mx-1">
         <select class="form-select select2" wire:model="export">
@@ -54,10 +53,10 @@
             </td>
             <td>{{ $property->created_at->format('d M Y') }}</td>
             <td>
-              {{ $property->agreement_start_date->format('d M Y') }}
+              {{ Carbon\Carbon::parse($property->agreement_start_date)->format('d M Y') }}
             </td>
             <td>
-              {{ $property->agreement_end_date->format('d M Y') }}
+              {{ Carbon\Carbon::parse($property->agreement_end_date)->format('d M Y') }}
             </td>
             <td>
               @if($property->is_active)
@@ -68,7 +67,7 @@
             </td>
             <td>
               <button class="btn btn-primary btn-sm">
-                <a href="#" class="text-white">View</a>
+                <a href="{{ route('properties.show', $property) }}" class="text-white">View</a>
               </button>
             </td>
           </tr>
