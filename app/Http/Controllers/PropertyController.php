@@ -30,11 +30,6 @@ class PropertyController extends Controller
         return view('content.property.index');
     }
 
-    public function propertiesResource()
-    {
-        return new PropertiesResource();
-    }
-
     public function create(): View
     {
         $property_types = PropertyType::all();

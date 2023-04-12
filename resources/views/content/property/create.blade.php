@@ -45,7 +45,6 @@
 @section('content')
   <h4 class="fw-bold">
     <span class="text-muted fw-light"><a href="{{ route('properties.index') }}">Properties</a> /</span> Add Property
-
   </h4>
   <!-- Property Listing Wizard -->
   <div id="wizard-property-listing" class="bs-stepper wizard">
@@ -181,7 +180,7 @@
         <div id="property-details" class="content">
           <div class="row g-3">
             <div class="col-sm-6">
-              <label class="form-label" for="plZipCode">Property Name</label>
+              <label class="form-label" for="plName">Property Name</label>
               <input type="text" id="plName" name="plName" class="form-control" placeholder="Enter Property Name" value="{{ old('plName') }}" />
               @error('plName')
                 <span class="text-danger">{{ $message }}</span>
@@ -195,7 +194,7 @@
                   <option value="{{ $property_type->id }}" @if(old('plPropertyType') == $property_type->id) selected @endif>{{ $property_type->name }}</option>
                 @endforeach
               </select>
-              @error('plPropertyName')
+              @error('plPropertyType')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>

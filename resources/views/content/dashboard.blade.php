@@ -47,7 +47,7 @@
                       <div class="col-6">
                         <ul class="list-unstyled mb-0">
                           <li class="d-flex mb-4 align-items-center">
-                            <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">28%</p>
+                            <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">{{ $property->units->count() }}</p>
                             <p class="mb-0">Units</p>
                           </li>
                           <li class="d-flex align-items-center mb-2">
@@ -59,7 +59,6 @@
                     </div>
                   </div>
                   <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                    {{-- TODO: Add url to view property on image --}}
                     <a href="{{ route('properties.show', $property) }}">
                       <img src="{{ url('/storage/property/cover/'.$property->cover_image) }}" alt="Website Analytics" width="170" class="card-website-analytics-img">
                     </a>

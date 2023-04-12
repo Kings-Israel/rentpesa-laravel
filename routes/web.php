@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\laravel_example\UserManagement;
 use \App\Http\Controllers\Auth\LoginController;
 use \App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UnitController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,12 +49,18 @@ Route::middleware('auth')->group(function() {
   })->middleware(['throttle:6,1'])->name('verification.send');
 
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+  Route::get('/dashboard', [DashboardController::class, 'index']);
   Route::prefix('user')->group(function() {
     Route::get('/profile/{user}', [UserController::class, 'show'])->name('profile.show');
   });
 
   // Properties
   Route::resource('/properties', PropertyController::class);
+  Route::get('units/create/{property?}', [UnitController::class, 'create'])->name('units.create');
+  Route::post('units/store', [UnitController::class, 'store'])->name('units.store');
+  Route::get('units/{unit}', [UnitController::class, 'show'])->name('units.show');
+  Route::get('units/{unit}/edit', [UnitController::class, 'edit'])->name('units.edit');
+  Route::put('units/{unit}/update', [UnitController::class, 'update'])->name('units.update');
 });
 
 $controller_path = 'App\Http\Controllers';

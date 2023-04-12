@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Property extends Model
 {
@@ -30,5 +31,13 @@ class Property extends Model
     public function subcounty(): BelongsTo
     {
       return $this->belongsTo(Subcounty::class);
+    }
+
+    /**
+     * Get all of the units for the Property
+     */
+    public function units(): HasMany
+    {
+      return $this->hasMany(Unit::class);
     }
 }
