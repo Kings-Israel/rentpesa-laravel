@@ -33,7 +33,7 @@ class UsersSeeder extends Seeder
         $landlord->assignRole('landlord');
 
         $tenant = User::factory()->create([
-          'name' => 'Agent',
+          'name' => 'Tenant',
           'email' => 'tenant@rentpesa.com',
         ]);
 

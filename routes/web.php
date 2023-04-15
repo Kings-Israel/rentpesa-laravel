@@ -56,11 +56,13 @@ Route::middleware('auth')->group(function() {
 
   // Properties
   Route::resource('/properties', PropertyController::class);
+  // Units
   Route::get('units/create/{property?}', [UnitController::class, 'create'])->name('units.create');
   Route::post('units/store', [UnitController::class, 'store'])->name('units.store');
   Route::get('units/{unit}', [UnitController::class, 'show'])->name('units.show');
   Route::get('units/{unit}/edit', [UnitController::class, 'edit'])->name('units.edit');
   Route::put('units/{unit}/update', [UnitController::class, 'update'])->name('units.update');
+  Route::get('units/{unit}', [UnitController::class, 'show'])->name('units.show');
 });
 
 $controller_path = 'App\Http\Controllers';

@@ -8,6 +8,7 @@ use App\Models\BillingFrequency;
 use App\Models\Property;
 use App\Models\Unit;
 use App\Models\UnitType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -56,7 +57,12 @@ class UnitController extends Controller
 
   public function show(Unit $unit)
   {
-    return view('content.property.units.show', $unit);
+    // Get Users
+    $users = User::all()->filter(function($user) {
+      return $user->getRoleNames()[0] === 'tenant';
+    });
+
+    return view('content.property.units.show', compact('unit', 'users'));
   }
 
   public function edit(Unit $unit)
@@ -83,5 +89,10 @@ class UnitController extends Controller
     toastr()->success('', 'Unit updated');
 
     return view('content.property.show', compact('property'));
+  }
+
+  public function assignUnit(Request $request)
+  {
+    // TODO: Create assign units table
   }
 }

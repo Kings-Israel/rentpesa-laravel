@@ -32,6 +32,7 @@
         <tr>
           <th>Unit Number</th>
           <th>Date Added</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -42,10 +43,10 @@
               <strong>{{ $unit->unit_number }}</strong>
             </td>
             <td>{{ $unit->created_at->format('d M Y') }}</td>
+            <td>Vacant/Occupied</td>
             <td>
-              <button class="btn btn-secondary btn-sm">
-                <a href="{{route('units.edit', $unit)}}" class="text-white">Edit</a>
-              </button>
+              <a href="{{route('units.edit', $unit)}}" class="text-white btn btn-secondary btn-sm">Edit</a>
+              <a href="{{route('units.show', $unit)}}" class="text-white btn btn-info btn-sm">Assign</a>
             </td>
           </tr>
         @endforeach
