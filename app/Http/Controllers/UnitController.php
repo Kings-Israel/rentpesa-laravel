@@ -91,6 +91,16 @@ class UnitController extends Controller
     return view('content.property.show', compact('property'));
   }
 
+  public function delete(Unit $unit)
+  {
+    $unit->delete();
+
+    // Flash message
+    toastr()->success('', 'Unit updated');
+
+    return view('content.property.show')->with('property', $unit->property);
+  }
+
   public function assignUnit(Request $request)
   {
     // TODO: Create assign units table
