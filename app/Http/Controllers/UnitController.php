@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssignUnitRequest;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\BillingFrequency;
@@ -9,6 +10,7 @@ use App\Models\Property;
 use App\Models\Unit;
 use App\Models\UnitType;
 use App\Models\User;
+use App\Models\UserUnit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -101,8 +103,13 @@ class UnitController extends Controller
     return view('content.property.show')->with('property', $unit->property);
   }
 
-  public function assignUnit(Request $request)
+  public function assignUnit(AssignUnitRequest $request)
   {
-    // TODO: Create assign units table
+    $assign_unit = UserUnit::create($request->all());
+
+    // Flash message
+    toastr()->success('', 'Unit assigned');
+
+    return back();
   }
 }

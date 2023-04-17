@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Property extends Model
 {
@@ -39,5 +40,13 @@ class Property extends Model
     public function units(): HasMany
     {
       return $this->hasMany(Unit::class);
+    }
+
+    /**
+     * Get all of the users for the Property
+     */
+    public function users(): HasManyThrough
+    {
+      return $this->hasManyThrough(User::class, Unit::class);
     }
 }
