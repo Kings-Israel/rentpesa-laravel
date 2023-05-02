@@ -49,4 +49,16 @@ class Property extends Model
     {
       return $this->hasManyThrough(User::class, Unit::class);
     }
+
+    /**
+     * Get all occupied units
+     */
+    public function occupiedUnits()
+    {
+      $units = $this->units;
+
+      return $units->filter(function ($unit) {
+        return $unit->isOccuppied();
+      });
+    }
 }

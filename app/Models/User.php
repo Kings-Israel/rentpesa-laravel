@@ -60,6 +60,14 @@ class User extends Authenticatable implements MustVerifyEmail
   }
 
   /**
+   * Get all of the ownedUnits for the User
+   */
+  public function ownedUnits(): HasManyThrough
+  {
+    return $this->hasManyThrough(Unit::class, Property::class);
+  }
+
+  /**
    * Get all of the units for the User
    */
   public function units(): HasManyThrough

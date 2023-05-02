@@ -207,7 +207,7 @@
   const supportTrackerEl = document.querySelector('#supportTracker'),
     supportTrackerOptions = {
       series: [85],
-      labels: ['Completed Task'],
+      labels: ['Occupied Units'],
       chart: {
         height: 360,
         type: 'radialBar'
