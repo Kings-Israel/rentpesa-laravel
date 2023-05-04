@@ -55,6 +55,26 @@
       </div>
     </div>
     <div class="col-md-6 col-lg-8 mb-3">
+      @role('admin')
+      <div class="card mb-2">
+        <div class="card-header">
+          <h4 class="card-title text-muted">
+            Landlord Details
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between flex-wrap">
+            <h5 class="text-muted">Name: <strong>{{ $property->user->name }}</strong></h5>
+            <h5 class="text-muted">Email: <strong>{{ $property->user->email }}</strong></h5>
+            <h5 class="text-muted">Phone Number: <strong>{{ $property->user->phone_number }}</strong></h5>
+            <h5 class="text-muted">Joined: <strong>{{ $property->user->created_at->format('d M Y') }}</strong></h5>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary btn-sm">View Details</a>
+        </div>
+      </div>
+      @endrole
       <livewire:content.property.property-units-list :property='$property' />
     </div>
   </div>
