@@ -58,10 +58,12 @@ class DashboardController extends Controller
             }
           }
         }
-        // Occupied Units Percentage
-        $occupied_units_percentage = (count($occupied_units) / count($units)) * 100;
-        $vacant_units_percentage = 100 - $occupied_units_percentage;
-        // Occupied Units Value
+        if (count($occupied_units) > 0 && count($units) > 0) {
+          // Occupied Units Percentage
+          $occupied_units_percentage = (int)((count($occupied_units) / count($units)) * 100);
+          $vacant_units_percentage = 100 - $occupied_units_percentage;
+          // Occupied Units Value
+        }
         $occupied_units_value = 0;
         foreach ($occupied_units as $occupied_unit) {
           $occupied_units_value += $occupied_unit->rent;

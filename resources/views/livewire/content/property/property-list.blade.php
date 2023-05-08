@@ -42,6 +42,7 @@
           <th>Agreement Start Date</th>
           <th>Agreement End Date</th>
           <th>Status</th>
+          <th>Units</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -64,6 +65,9 @@
               @else
                 <span class="badge bg-label-danger me-1">Inactive</span>
               @endif
+            </td>
+            <td>
+              {{ $property->units->count() }}
             </td>
             <td>
               <button class="btn btn-primary btn-sm">

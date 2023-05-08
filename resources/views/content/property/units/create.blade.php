@@ -93,7 +93,7 @@
               @enderror
             </div>
             <div class="col-lg-6">
-              <label class="form-label" for="deposit">Deposit</label>
+              <label class="form-label" for="deposit">Deposit(% of the unit rent)</label>
               <input type="number" id="deposit" name="deposit" class="form-control" placeholder="12" value="{{ old('deposit') }}" />
               @error('deposit')
                 <span class="text-danger">{{ $message }}</span>
