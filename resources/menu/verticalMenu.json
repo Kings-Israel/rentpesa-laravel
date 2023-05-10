@@ -13,6 +13,12 @@
       "icon": "menu-icon ti ti-home ti-sm"
     },
     {
+      "url": "/units",
+      "name": "Units",
+      "slug": "app-properties",
+      "icon": "menu-icon ti ti-home ti-sm"
+    },
+    {
       "name": "Layouts",
       "icon": "menu-icon tf-icons ti ti-layout-sidebar",
       "slug": "layouts",

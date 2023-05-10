@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function() {
   // Properties
   Route::resource('/properties', PropertyController::class);
   // Units
+  Route::get('/units', [UnitController::class, 'index'])->name('units.index');
   Route::get('units/create/{property?}', [UnitController::class, 'create'])->name('units.create');
   Route::post('units/store', [UnitController::class, 'store'])->name('units.store');
   Route::get('units/{unit}', [UnitController::class, 'show'])->name('units.show');

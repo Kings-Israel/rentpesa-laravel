@@ -26,6 +26,7 @@ class UnitController extends Controller
   public function index()
   {
     // TODO: Create view for all units, separated according to roles(admin can view all units, landlord and agents can only see their units)
+    return view('content.property.units.index');
   }
 
   public function create(Property $property = null)

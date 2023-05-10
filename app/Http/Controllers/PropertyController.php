@@ -47,21 +47,22 @@ class PropertyController extends Controller
 
     public function store(StorePropertyRequest $request)
     {
+      // dd($request->all());
       if (auth()->user()->hasRole('admin')) {
         $property = new Property();
         if ($request->plUserType == 2) {
-          if ($request->has('plPropertyLandlord') && ($request->plPropertyLandlord === '' || $request->plPropertyLandlord === null)) {
+          if ($request->has('plPropertyLandlord') && $request->plPropertyLandlord !== '' && $request->plPropertyLandlord !== null) {
+            $user = User::find($request->plPropertyLandlord);
+            // TODO: Add functionality to send a notification to the user
+          } else {
             $user = User::create([
               'name' => $request->plPropertyFirstName . ' ' . $request->plPropertyLastName,
               'email' => $request->plPropertyEmail,
-              'phone_number' => $request->plPropertyPhoneNumber,
-              'password' => bcrypt($request->plPropertyPassword),
+              'phone_number' => $request->plPropertyContact,
+              'password' => bcrypt($request->password),
             ]);
 
             $user->assignRole('landlord');
-            // TODO: Add functionality to send a notification to the user
-          } else {
-            $user = User::find($request->plPropertyLandlord);
           }
         } else {
           $user = auth()->user();
