@@ -34,7 +34,7 @@
       <div class="swiper-container swiper-container-horizontal swiper swiper-card-advance-bg" id="swiper-with-pagination-cards">
         <div class="swiper-wrapper">
           @if(count($properties) > 0)
-            @foreach($properties->take(3) as $property)
+            @foreach($properties->random(3) as $property)
               <div class="swiper-slide">
               <div class="row">
                 <div class="col-12">
